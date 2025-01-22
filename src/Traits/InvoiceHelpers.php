@@ -261,6 +261,7 @@ trait InvoiceHelpers
         (! $this->hasItemUnits) ?: $this->table_columns++;
         (! $this->hasItemDiscount) ?: $this->table_columns++;
         (! $this->hasItemTax) ?: $this->table_columns++;
+        (! $this->hasItemTaxRate) ?: $this->table_columns++;
     }
 
     public function calculateDiscount(): void
@@ -369,10 +370,21 @@ trait InvoiceHelpers
                     $this->hasItemDiscount = true;
                 }
 
+                if ($item->hasDiscount()) {
+                    $total_discount += $item->discount;
+                    $this->hasItemDiscount = true;
+                }
+
                 if ($item->hasTax()) {
                     $total_taxes += $item->tax;
                     $this->hasItemTax = true;
                 }
+
+
+                if ($item->hasTaxRate()) {
+                    $this->hasItemTaxRate = true;
+                }
+
 
                 // Totals
                 $total_amount += $item->sub_total_price;

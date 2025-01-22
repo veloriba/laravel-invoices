@@ -123,6 +123,11 @@ class Invoice
     /**
      * @var bool
      */
+    public $hasItemTaxRate;
+
+    /**
+     * @var bool
+     */
     public $hasItemTax;
 
     /**

@@ -172,7 +172,7 @@ class InvoiceItem
         }
 
         $this->tax                            = $amount;
-        ! $byPercent ?: $this->tax_percentage = $amount;
+//        ! $byPercent ?: $this->tax_percentage = $amount;
 
         return $this;
     }
@@ -201,6 +201,13 @@ class InvoiceItem
         return $this;
     }
 
+    public function taxRate(float $rate)
+    {
+        $this->tax_percentage = $rate;
+
+        return $this;
+    }
+
     /**
      * @return bool
      */
@@ -223,6 +230,14 @@ class InvoiceItem
     public function hasTax()
     {
         return $this->tax !== 0.0;
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasTaxRate()
+    {
+        return $this->tax_percentage !== null;
     }
 
     /**
